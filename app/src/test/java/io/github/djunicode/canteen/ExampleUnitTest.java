@@ -1,4 +1,4 @@
-package com.example.ruturaj.canteenapp;
+package io.github.djunicode.canteen;
 
 import org.junit.Test;
 

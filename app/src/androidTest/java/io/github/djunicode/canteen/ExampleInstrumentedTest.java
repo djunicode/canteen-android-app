@@ -1,4 +1,4 @@
-package com.example.ruturaj.canteenapp;
+package io.github.djunicode.canteen;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.ruturaj.canteenapp", appContext.getPackageName());
+        assertEquals("io.github.djunicode.canteen", appContext.getPackageName());
     }
 }
