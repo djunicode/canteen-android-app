@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Canteen App</string>
+
+    <string name="Signup"><u>Signup</u></string>
+
+    <string name="already"><u>Already have an account ?</u></string>
 </resources>
