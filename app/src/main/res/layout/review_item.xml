@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--not needed in the prototype-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_img"
+        android:text="USER NAME"
+        android:layout_toRightOf="@id/profile_img"
+        android:layout_marginStart="50dp"
+        android:layout_marginVertical="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:id="@+id/username"
+    />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review here"
+        android:layout_below="@id/username"
+        android:layout_alignStart="@id/username"
+        android:textStyle="italic"
+        android:textSize="15dp"
+        android:layout_marginVertical="5dp"
+
+    />
+
+
+</RelativeLayout>
