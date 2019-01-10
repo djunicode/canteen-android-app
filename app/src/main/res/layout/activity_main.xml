@@ -11,7 +11,8 @@
         android:id="@+id/fragment_placeholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_nav" />
+        android:layout_above="@id/bottom_nav"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_nav"
