@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:padding="3dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:text="Dosa"
+
+    />
+
+
+    <LinearLayout
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/customize"
+        android:layout_centerHorizontal="true"
+        android:background="#F69500">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="-"
+            android:layout_weight="1"
+            android:gravity="center"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="2"
+            android:layout_weight="1"
+            android:gravity="center"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="+"
+            android:layout_weight="1"
+            android:gravity="center"
+        />
+
+
+    </LinearLayout>
+
+
+    <Spinner
+        android:id="@+id/customize"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/title"
+        android:layout_margin="5dp"
+    />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/price"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:text="Rs 20"
+        android:layout_alignTop="@id/customize"
+        android:layout_alignParentEnd="true"
+
+
+    />
+
+
+</RelativeLayout>
