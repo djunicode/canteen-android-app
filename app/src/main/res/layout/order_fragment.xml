@@ -16,23 +16,8 @@
             android:layout_height="wrap_content"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:tabTextColor="@color/myYellow">
+            app:tabTextColor="@color/myYellow"/>
 
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItemUsers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Previous Orders" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current Order" />
-
-
-        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

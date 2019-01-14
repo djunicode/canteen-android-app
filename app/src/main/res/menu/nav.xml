@@ -5,15 +5,15 @@
           android:icon="@mipmap/ic_launcher"
           android:title="Menu"/>
 
-    <item android:id="@+id/cart"
+    <item android:id="@+id/nav_cart"
           android:icon="@mipmap/ic_launcher"
           android:title="Cart"/>
 
-    <item android:id="@+id/order"
+    <item android:id="@+id/nav_order"
           android:icon="@mipmap/ic_launcher"
           android:title="Orders"/>
 
-    <item android:id="@+id/profile"
+    <item android:id="@+id/nav_profile"
           android:icon="@mipmap/ic_launcher"
           android:title="Profile"/>
 
