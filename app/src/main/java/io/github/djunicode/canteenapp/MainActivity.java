@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import io.github.djunicode.canteenapp.fragments.Cart;
+import io.github.djunicode.canteenapp.fragments.Menu;
 import io.github.djunicode.canteenapp.fragments.Orders;
+import io.github.djunicode.canteenapp.fragments.Profile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()){
 
                 case R.id.nav_menu:
+                    Fragment menu = new Menu();
+                    fragmentTransaction.replace(R.id.fragment_placeholder,menu);
+                    fragmentTransaction.commit();
                     return  true;
 
                 case R.id.nav_cart:
@@ -64,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_profile:
+                    Fragment profile = new Profile();
+                    fragmentTransaction.replace(R.id.fragment_placeholder,profile);
+                    fragmentTransaction.commit();
                     return true;
             }
 

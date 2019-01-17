@@ -42,11 +42,12 @@
 
             />
 
-            <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-            android:layout_below="@id/time">
+            <ListView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/time"
+            android:id="@+id/list_previous">
 
-            </android.support.v7.widget.RecyclerView>
+            </ListView>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
