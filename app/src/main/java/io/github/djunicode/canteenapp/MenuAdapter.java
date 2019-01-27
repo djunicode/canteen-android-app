@@ -17,28 +17,65 @@ import io.github.djunicode.canteenapp.models.MenuItemModel;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
     private List<MenuItemModel> menuList;
+    int q;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, price, time;
+        public TextView title, price, time , quantity , plus ,minus;
         public Button Add;
         public GridLayout gridadd;
+
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             time = (TextView) view.findViewById(R.id.time);
             price = (TextView) view.findViewById(R.id.price);
-            Add=view.findViewById(R.id.add);
+            Add=view.findViewById(R.id.add_menu);
             gridadd=view.findViewById(R.id.gridadd);
-            Add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Add.setVisibility(View.INVISIBLE);
-                    gridadd.setVisibility(View.VISIBLE);
-                }
-            });
 
+            plus = view.findViewById(R.id.plus_menu);
+            minus = view.findViewById(R.id.minus_menu);
+            quantity = view.findViewById(R.id.quantity_menu);
+
+            mListener listener = new mListener();
+
+            Add.setOnClickListener(listener);
+            plus.setOnClickListener(listener);
+            minus.setOnClickListener(listener);
+
+            q=1;
 
         }
+
+
+        public class mListener implements View.OnClickListener {
+
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+
+                    case R.id.plus_menu:
+                        quantity.setText(Integer.toString(++q));
+                        break;
+
+
+                    case R.id.minus_menu:
+                        if(q>1){
+                            quantity.setText(Integer.toString(--q));
+                        }else if(q==1){
+                            Add.setVisibility(View.VISIBLE);
+                            gridadd.setVisibility(View.GONE);
+                        }
+                        break;
+
+
+                    case R.id.add_menu:
+                        Add.setVisibility(View.GONE);
+                        gridadd.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+        }
+
     }
 
 
@@ -67,4 +104,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
         return menuList.size();
 
     }
+
+
 }
