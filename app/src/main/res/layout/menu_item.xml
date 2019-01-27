@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto" 
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
@@ -73,7 +73,7 @@
                             android:layout_height="match_parent">
                             <Button
                                 android:layout_width="90dp"
-                                android:id="@+id/add"
+                                android:id="@+id/add_menu"
                                 android:layout_height="40dp"
                                 android:background="#FFC82C"
 
@@ -82,39 +82,36 @@
                                 android:textSize="18sp" />
                             <GridLayout
                                 android:id="@+id/gridadd"
-                                android:visibility="invisible"
+                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:columnCount="3"
 
                                 android:layout_height="match_parent">
-                                <TextView android:layout_height="match_parent"
+                                <TextView android:id="@+id/minus_menu"
                                           android:layout_width="26dp"
-
+                                          android:layout_height="match_parent"
                                           android:background="#FFC82C"
-
-                                          android:textColor="#fff"
+                                          android:text="-"
                                           android:textAlignment="center"
-                                          android:text="+"
+                                          android:textColor="#fff"
                                           android:textSize="20sp"/>
 
-                                <TextView android:layout_height="match_parent"
+                                <TextView android:id="@+id/quantity_menu"
                                           android:layout_width="26dp"
+                                          android:layout_height="match_parent"
                                           android:background="#FFC82C"
                                           android:text="1"
-
-                                          android:textColor="#fff"
-
                                           android:textAlignment="center"
+                                          android:textColor="#fff"
                                           android:textSize="20sp"/>
 
-                                <TextView android:layout_height="match_parent"
+                                <TextView android:id="@+id/plus_menu"
                                           android:layout_width="26dp"
+                                          android:layout_height="match_parent"
                                           android:background="#FFC82C"
-
-                                          android:textColor="#fff"
-
+                                          android:text="+"
                                           android:textAlignment="center"
-                                          android:text="-"
+                                          android:textColor="#fff"
                                           android:textSize="20sp"/>
 
                             </GridLayout>

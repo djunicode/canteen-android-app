@@ -13,12 +13,13 @@
                                         android:elevation="@dimen/cardview_default_elevation"
     >
 
-        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                android:layout_height="wrap_content">
+        <ListView android:id="@+id/list_checkout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
 
             <!--food items-->
 
-        </android.support.v7.widget.RecyclerView>
+        </ListView>
 
 
     </android.support.v7.widget.CardView>
@@ -73,6 +74,7 @@
             android:paddingHorizontal="55dp"
             android:paddingVertical="15dp"
             android:text="Confirm Order"
+            android:id="@+id/confirm_checkout"
 
     />
 </RelativeLayout>

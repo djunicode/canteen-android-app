@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import io.github.djunicode.canteenapp.MainActivity;
 import io.github.djunicode.canteenapp.R;
 
 public class Orders extends Fragment {
@@ -35,9 +36,10 @@ public class Orders extends Fragment {
 
         tabs.setupWithViewPager(viewPager);
 
+        viewPager.setCurrentItem(1);
+
         return view;
     }
-
 
 
     class PagerAdapter extends FragmentPagerAdapter {

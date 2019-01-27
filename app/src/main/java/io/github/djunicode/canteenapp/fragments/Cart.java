@@ -1,5 +1,6 @@
 package io.github.djunicode.canteenapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.github.djunicode.canteenapp.CheckOutActivity;
+import io.github.djunicode.canteenapp.MainActivity;
 import io.github.djunicode.canteenapp.R;
 import io.github.djunicode.canteenapp.models.FoodItem;
 
@@ -67,6 +70,17 @@ public class Cart extends Fragment {
 
 
         calculateTotal();
+
+
+        view.findViewById(R.id.pay_cart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent( getActivity() , CheckOutActivity.class);
+
+                startActivityForResult(intent,0);
+            }
+        });
 
     }
 
