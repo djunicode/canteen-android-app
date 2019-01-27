@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:padding="3dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/title"
+        android:id="@+id/title_cart"
         android:textStyle="bold"
-        android:textSize="25dp"
+        android:textSize="20sp"
         android:textColor="#000000"
         android:text="Dosa"
 
@@ -20,7 +21,7 @@
         android:layout_height="30dp"
         android:layout_alignTop="@id/customize"
         android:layout_centerHorizontal="true"
-        android:background="#F69500">
+        android:background="@color/myYellow">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,6 +29,7 @@
             android:text="-"
             android:layout_weight="1"
             android:gravity="center"
+            android:id="@+id/minus_cart"
         />
 
         <TextView
@@ -36,6 +38,7 @@
             android:text="2"
             android:layout_weight="1"
             android:gravity="center"
+            android:id="@+id/quantity_cart"
         />
 
         <TextView
@@ -44,6 +47,7 @@
             android:text="+"
             android:layout_weight="1"
             android:gravity="center"
+            android:id="@+id/plus_cart"
         />
 
 
@@ -55,7 +59,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/title"
+        android:layout_below="@id/title_cart"
         android:layout_margin="5dp"
     />
 
@@ -63,9 +67,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/price"
+        android:id="@+id/price_cart"
         android:textStyle="bold"
-        android:textSize="25dp"
+        android:textSize="20sp"
         android:textColor="#000000"
         android:text="Rs 20"
         android:layout_alignTop="@id/customize"

@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Canteen App</string>
 
-    <string name="Signup"><u>Signup</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="already"><u>Already have an account ?</u></string>
+    <string name="Signup">
+        <u>Signup</u>
+    </string>
+
+    <string name="already">
+        <u>Already have an account ?</u>
+    </string>
 </resources>

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:background="#C0CCDA">
+                android:background="@color/myBackground">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/bill_cart"
         android:layout_margin="5dp"
         android:background="#FFFFFF">
 
@@ -16,13 +18,14 @@
 
 
     <android.support.v7.widget.CardView
+        android:id="@+id/bill_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_above="@+id/pay"
-        app:cardBackgroundColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
         android:elevation="@dimen/cardview_default_elevation"
-        android:layout_marginBottom="55dp"
+        app:cardBackgroundColor="#FFFFFF"
     >
 
         <RelativeLayout
@@ -30,22 +33,23 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/total_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TOTAL"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="5dp"
-                android:id="@+id/total_text"
+                android:text="TOTAL"
             />
 
             <TextView
+                android:id="@+id/total_price_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RS 120"
                 android:layout_below="@+id/total_text"
                 android:layout_centerHorizontal="true"
-                android:textSize="20dp"
+                android:text="RS 120"
                 android:textColor="#000000"
+                android:textSize="20dp"
             />
 
             <TextView
@@ -54,14 +58,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="39dp"
-                android:layout_marginTop="79dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
                 android:text="Item Total"
                 android:textColor="#000000"
                 android:textSize="15dp"/>
 
             <TextView
-                android:id="@+id/item_total_amount"
+                android:id="@+id/item_total_amount_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/item_total_text"
@@ -76,18 +80,18 @@
                 android:id="@+id/Tax_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/item_total_text"
                 android:layout_below="@id/item_total_text"
-                android:layout_marginVertical="25dp"
+                android:layout_alignStart="@+id/item_total_text"
+                android:layout_marginVertical="10dp"
                 android:text="Tax"
                 android:textColor="#000000"
                 android:textSize="15dp"/>
 
             <TextView
-                android:id="@+id/tax_amount"
+                android:id="@+id/tax_amount_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/item_total_amount"
+                android:layout_alignStart="@+id/item_total_amount_cart"
                 android:layout_alignTop="@id/Tax_title"
                 android:text="20"
                 android:textColor="#000000"
@@ -101,13 +105,13 @@
 
 
     <Button
-        android:id="@+id/pay"
+        android:id="@+id/pay_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#FFC82C"
+        android:layout_marginVertical="0dp"
+        android:background="@color/myYellow"
         android:text="Proceed to Payment"
-        android:layout_marginVertical="10dp"
     />
 
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--wrap content and match parent doesn't work on this relative layout-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/myBackground">
+
+<!--this will be the single item in the list of previous orders-->
+
+    <android.support.v7.widget.CardView android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="15dp">
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/date"
+                      android:textSize="20sp"
+                      android:text="2/1/2019"
+                      android:textColor="#000000"
+                      android:layout_margin="10dp"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/time"
+                      android:layout_alignStart="@+id/date"
+                      android:textSize="15sp"
+                      android:layout_below="@+id/date"
+                      android:text="11:30"
+
+            />
+
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignTop="@id/date"
+                      android:text="Rs 120/-"
+                      android:layout_marginEnd="15dp"
+                      android:textSize="25sp"
+                      android:textStyle="bold"
+                      android:textColor="#000000"
+
+            />
+
+            <ListView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/time"
+            android:id="@+id/list_previous">
+
+            </ListView>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

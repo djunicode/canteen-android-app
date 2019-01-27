@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/myBackground">
+
+
+    <android.support.v7.widget.CardView android:id="@+id/card1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="5dp"
+                                        android:background="#ffffff"
+                                        android:elevation="@dimen/cardview_default_elevation"
+    >
+
+        <ListView android:id="@+id/list_checkout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+            <!--food items-->
+
+        </ListView>
+
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/card1"
+                                        android:layout_margin="5dp"
+                                        android:background="#fff"
+                                        android:elevation="@dimen/cardview_default_elevation">
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_marginHorizontal="5dp"
+                      android:layout_marginVertical="15dp"
+                      android:text="BALANCE"
+                      android:textColor="#000"
+                      android:textSize="20sp"
+
+            />
+
+            <TextView android:id="@+id/amount_checkout" android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentTop="true"
+                      android:layout_alignParentEnd="true"
+                      android:layout_marginHorizontal="5dp"
+                      android:layout_marginVertical="15dp"
+                      android:text="Rs 200"
+                      android:textColor="#006400"
+                      android:textSize="20sp"
+            />
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_below="@+id/amount_checkout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    android:background="@color/myYellow"
+                    android:paddingHorizontal="35dp"
+                    android:paddingVertical="15dp"
+                    android:text="Add money"
+            />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:background="@color/myYellow"
+            android:paddingHorizontal="55dp"
+            android:paddingVertical="15dp"
+            android:text="Confirm Order"
+            android:id="@+id/confirm_checkout"
+
+    />
+</RelativeLayout>
