@@ -21,7 +21,7 @@
         android:id="@+id/bill_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/pay"
+        android:layout_above="@+id/pay_cart"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:elevation="@dimen/cardview_default_elevation"

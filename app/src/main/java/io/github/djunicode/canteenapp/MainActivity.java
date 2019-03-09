@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(bottomNavListener);
-        bottomNav.setSelectedItemId(R.id.nav_cart);
+
 
         FragmentTransaction fragmentTransaction= mFragmentManager.beginTransaction();
 
-        Fragment cart = new Cart();
-        fragmentTransaction.add(R.id.fragment_placeholder,cart);
+        Fragment menu = new Menu();
+        fragmentTransaction.add(R.id.fragment_placeholder,menu);
         fragmentTransaction.commit();
-        setActionBarTitle("CART");
+        setActionBarTitle("MENU");
     }
 
 
