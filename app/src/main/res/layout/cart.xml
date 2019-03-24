@@ -3,6 +3,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:card_view="http://schemas.android.com/tools"
                 android:background="@color/myBackground">
 
     <android.support.v7.widget.RecyclerView
@@ -10,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bill_cart"
-        android:layout_margin="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp"
         android:background="#FFFFFF">
 
 
@@ -24,7 +26,9 @@
         android:layout_above="@+id/pay_cart"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:elevation="@dimen/cardview_default_elevation"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="3dp"
         app:cardBackgroundColor="#FFFFFF"
     >
 
@@ -112,6 +116,9 @@
         android:layout_marginVertical="0dp"
         android:background="@color/myYellow"
         android:text="Proceed to Payment"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="3dp"
     />
 
 

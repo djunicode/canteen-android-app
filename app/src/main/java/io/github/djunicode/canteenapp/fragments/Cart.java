@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -88,7 +91,7 @@ public class Cart extends Fragment {
     void setUpDummy(){
         items = new ArrayList<>();
 
-        for(int i =0;i<5;i++){
+        for(int i =0;i<7;i++){
 
             items.add(new FoodItem("items "+i,20,2));
 
@@ -158,6 +161,7 @@ public class Cart extends Fragment {
         public class myViewHolder extends RecyclerView.ViewHolder{
 
             TextView name,price,quantity,minus,plus;
+            Spinner customize;
 
             public myViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -168,6 +172,31 @@ public class Cart extends Fragment {
                 minus=(TextView)itemView.findViewById(R.id.minus_cart);
                 plus=(TextView)itemView.findViewById(R.id.plus_cart);
 
+                customize = (Spinner)itemView.findViewById(R.id.customize);
+
+                ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.spinner_values,android.R.layout.simple_spinner_item);
+
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                customize.setAdapter(spinnerAdapter);
+
+                customize.setSelection(1);
+
+                customize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        // An item was selected. You can retrieve the selected item using
+                        // parent.getItemAtPosition(pos)
+
+                        //this to change the size of text dynamically
+                        ((TextView) parent.getChildAt(0)).setTextSize(10);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
                 listener mlistener =new listener();
                 minus.setOnClickListener(mlistener);

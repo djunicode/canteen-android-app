@@ -13,10 +13,10 @@
     />
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_alignTop="@+id/name_order"
+              android:layout_alignBottom="@+id/name_order"
               android:text="X 2"
               android:textStyle="normal"
-              android:textSize="18sp"
+              android:textSize="20sp"
               android:layout_marginHorizontal="10dp"
               android:layout_marginTop="5dp"
               android:layout_toEndOf="@id/name_order"
@@ -27,7 +27,7 @@
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:layout_alignParentEnd="true"
-              android:layout_alignTop="@+id/name_order"
+              android:layout_alignBottom="@+id/name_order"
               android:text="60"
               android:textSize="20sp"
               android:layout_marginTop="5dp"

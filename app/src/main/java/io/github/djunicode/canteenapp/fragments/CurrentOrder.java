@@ -38,6 +38,8 @@ public class CurrentOrder extends Fragment {
         setUpDummy();
 
         ListView list = (ListView)view.findViewById(R.id.list_current_order);
+        list.setDivider(null);
+        list.setDividerHeight(0);
 
         OrderAdapter madapter = new OrderAdapter(items,getActivity());
 
