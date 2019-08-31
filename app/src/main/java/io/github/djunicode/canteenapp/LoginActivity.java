@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
         loginButton = findViewById(R.id.loginbtn);
 
         token = retrieveToken();
+        loginInterface = customRetrofit.create(LoginInterface.class);
 
         if(token != null){
             Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
