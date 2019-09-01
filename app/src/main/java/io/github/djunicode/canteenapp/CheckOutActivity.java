@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.github.djunicode.canteenapp.models.FoodItem;
+import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class CheckOutActivity extends AppCompatActivity {
 
-    ArrayList<FoodItem> items;
+    List<MenuItem> items;
 
 
     @Override
@@ -20,11 +22,11 @@ public class CheckOutActivity extends AppCompatActivity {
         setContentView(R.layout.checkout);
 
 
-        setUpDummy();
+//        setUpDummy();
 
         ListView list = (ListView) findViewById(R.id.list_checkout);
 
-        OrderAdapter madapter = new OrderAdapter(items, this);
+        OrderAdapter madapter = new OrderAdapter(GlobalData.getInstance().getSelectedItems(), this);
 
         list.setAdapter(madapter);
 
@@ -37,7 +39,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         for (int i = 0; i < 5; i++) {
 
-            items.add(new FoodItem("items " + i, 20, 2));
+            items.add(new MenuItem(1,10,0,10,"name","jain","10",true));
 
 
         }

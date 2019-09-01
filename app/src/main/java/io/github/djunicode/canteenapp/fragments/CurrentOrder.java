@@ -16,10 +16,11 @@ import java.util.ArrayList;
 import io.github.djunicode.canteenapp.OrderAdapter;
 import io.github.djunicode.canteenapp.R;
 import io.github.djunicode.canteenapp.models.FoodItem;
+import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class CurrentOrder extends Fragment {
 
-    ArrayList<FoodItem> items;
+    ArrayList<MenuItem> items;
 
 
     @Nullable
@@ -51,8 +52,7 @@ public class CurrentOrder extends Fragment {
 
         for(int i =0;i<5;i++){
 
-            items.add(new FoodItem("items "+i,20,2));
-
+            items.add(new MenuItem(1,10,0,10,"name","jain","10",true));
 
         }
 
