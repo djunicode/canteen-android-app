@@ -79,24 +79,24 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
-//
-//        if(token != null){
-//            Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
-//            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//            startActivity(i);
-//        } else {
-//
-//            loginButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    emailString = email.getText().toString();
-//                    passwordString = SHAHashing();
-//
-//                    login(emailString, passwordString);
-//                }
-//            });
-//
-//        }
+
+        if(token != null){
+            Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+        } else {
+
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    emailString = email.getText().toString();
+                    passwordString = SHAHashing();
+
+                    login(emailString, passwordString);
+                }
+            });
+
+        }
     }
 
     public String SHAHashing()
