@@ -10,13 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import io.github.djunicode.canteenapp.OrderAdapter;
 import io.github.djunicode.canteenapp.R;
-import io.github.djunicode.canteenapp.models.FoodItem;
 import io.github.djunicode.canteenapp.models.MenuItem;
 import io.github.djunicode.canteenapp.models.Order;
 

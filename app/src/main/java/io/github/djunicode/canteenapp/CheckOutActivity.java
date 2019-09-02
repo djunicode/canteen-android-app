@@ -8,7 +8,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.djunicode.canteenapp.models.FoodItem;
 import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class CheckOutActivity extends AppCompatActivity {

@@ -21,7 +21,7 @@ import java.security.MessageDigest;
 
 import io.github.djunicode.canteenapp.RequestObjects.SignInRequest;
 import io.github.djunicode.canteenapp.ResponseObjects.SignInResponse;
-import io.github.djunicode.canteenapp.RetrofitInterfaces.LoginInterface;
+import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +32,7 @@ public class LoginActivity extends BaseActivity {
     Button loginButton;
     String emailString, passwordString;
     private String token;
-    private LoginInterface loginInterface;
+    private ApiInterface apiInterface;
     public static final String TOKEN_SHARED_PREFS_KEY = "tokenKey";
     public static final String TOKEN_STRING = "token";
     Button login;
@@ -52,7 +52,7 @@ public class LoginActivity extends BaseActivity {
         loginButton = findViewById(R.id.loginbtn);
 
         token = retrieveToken();
-        loginInterface = customRetrofit.create(LoginInterface.class);
+        apiInterface = customRetrofit.create(ApiInterface.class);
 
         email.addTextChangedListener(new MyTextWatcher(email));
         password.addTextChangedListener(new MyTextWatcher(password));
@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity {
 
         SignInRequest post = new SignInRequest(email, password);
 
-        Call<SignInResponse> call = loginInterface.createPostLogin(post);
+        Call<SignInResponse> call = apiInterface.createPostLogin(post);
         call.enqueue(new Callback<SignInResponse>() {
             @Override
             public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {

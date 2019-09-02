@@ -23,9 +23,7 @@ import java.util.List;
 
 import io.github.djunicode.canteenapp.CheckOutActivity;
 import io.github.djunicode.canteenapp.GlobalData;
-import io.github.djunicode.canteenapp.MainActivity;
 import io.github.djunicode.canteenapp.R;
-import io.github.djunicode.canteenapp.models.FoodItem;
 import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class Cart extends Fragment {

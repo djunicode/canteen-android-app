@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.github.djunicode.canteenapp.models.FoodItem;
 import io.github.djunicode.canteenapp.models.MenuItem;
 
 //This is the adapter for listview for orders in both previous and current order fragment

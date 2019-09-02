@@ -20,12 +20,10 @@ import java.util.List;
 
 import io.github.djunicode.canteenapp.API;
 import io.github.djunicode.canteenapp.GlobalData;
-import io.github.djunicode.canteenapp.MainActivity;
 import io.github.djunicode.canteenapp.MenuAdapter;
 import io.github.djunicode.canteenapp.R;
 import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
 import io.github.djunicode.canteenapp.models.MenuItem;
-import io.github.djunicode.canteenapp.models.MenuItemModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
