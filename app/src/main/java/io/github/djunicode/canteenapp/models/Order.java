@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Order {
 
     String date,time,id;
-    ArrayList<FoodItem> items;
+    ArrayList<MenuItem> items;
 
     public Order(String date, String time, String id,
-            ArrayList<FoodItem> items) {
+            ArrayList<MenuItem> items) {
         this.date = date;
         this.time = time;
         this.id = id;
@@ -27,7 +27,7 @@ public class Order {
         return id;
     }
 
-    public ArrayList<FoodItem> getItems() {
+    public ArrayList<MenuItem> getItems() {
         return items;
     }
 }

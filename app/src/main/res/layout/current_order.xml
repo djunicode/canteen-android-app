@@ -3,13 +3,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:background="#C0CCDA">
 
 
     <android.support.v7.widget.CardView android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
-                                        android:layout_margin="15dp">
+                                        android:layout_margin="15dp"
+                                        card_view:cardUseCompatPadding="true"
+                                        card_view:cardElevation="6dp"
+                                        card_view:cardCornerRadius="3dp">
 
      <RelativeLayout android:layout_width="match_parent"
                      android:layout_height="match_parent">
@@ -50,21 +54,24 @@
 
     />
 
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_below="@+id/time"
-                                            android:layout_marginTop="25dp"
-                                            android:id="@+id/recycler_current_order"
+    <!--<android.support.v7.widget.RecyclerView android:layout_width="match_parent"-->
+                                            <!--android:layout_height="wrap_content"-->
+                                            <!--android:layout_below="@+id/time"-->
+                                            <!--android:layout_marginTop="25dp"-->
+                                            <!--android:id="@+id/recycler_current_order"-->
 
 
-    >
+    <!--&gt;-->
 
-        <!--list of food items-->
-    </android.support.v7.widget.RecyclerView>
+        <!--&lt;!&ndash;list of food items&ndash;&gt;-->
+    <!--</android.support.v7.widget.RecyclerView>-->
 
      <ListView android:layout_width="match_parent" android:layout_height="wrap_content"
-     android:layout_below="@+id/recycler_current_order"
+     android:layout_below="@+id/time"
                android:id="@+id/list_current_order"
+               android:divider="@null"
+               android:dividerHeight="0dp"
+
      >
 
      </ListView>

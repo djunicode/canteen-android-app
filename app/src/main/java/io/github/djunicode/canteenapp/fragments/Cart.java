@@ -13,22 +13,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.github.djunicode.canteenapp.CheckOutActivity;
-import io.github.djunicode.canteenapp.MainActivity;
+import io.github.djunicode.canteenapp.GlobalData;
 import io.github.djunicode.canteenapp.R;
-import io.github.djunicode.canteenapp.models.FoodItem;
+import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class Cart extends Fragment {
 
+    private static final String TAG = "Cart";
 
-    ArrayList<FoodItem> items;
+    List<MenuItem> items = new ArrayList<>();
     RecyclerView myRecyclerView;
     RecyclerView.Adapter adapter;
     Double total=0.0,itemTotal=0.0,tax=0.0;
+
 
     TextView txtTotal,txtItemTotal,txtTax;
 
@@ -49,6 +55,7 @@ public class Cart extends Fragment {
         myRecyclerView=(RecyclerView)view.findViewById(R.id.recycler_cart);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
         myRecyclerView.setLayoutManager(layoutManager);
 
         DividerItemDecoration  dividerItemDecoration = new DividerItemDecoration(myRecyclerView.getContext(),
@@ -59,10 +66,11 @@ public class Cart extends Fragment {
         adapter = new CartAdapter();
         myRecyclerView.setAdapter(adapter);
 
-        setUpDummy();
+        items.addAll(GlobalData.getInstance().getSelectedItems());
+//        setUpDummy();
 
 
-
+        adapter.notifyDataSetChanged();
 
         txtItemTotal=(TextView)view.findViewById(R.id.item_total_amount_cart);
         txtTotal=(TextView)view.findViewById(R.id.total_price_cart);
@@ -84,13 +92,34 @@ public class Cart extends Fragment {
 
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        items = GlobalData.getInstance().getSelectedItems();
+//        adapter.notifyDataSetChanged();
+//    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            Log.i(TAG, "onHiddenChanged: ");
+
+            myRecyclerView.setAdapter(null);
+            items.clear();
+            items.addAll(GlobalData.getInstance().getSelectedItems());
+            myRecyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     void setUpDummy(){
         items = new ArrayList<>();
 
-        for(int i =0;i<5;i++){
+        for(int i =0;i<7;i++){
 
-            items.add(new FoodItem("items "+i,20,2));
+            items.add(new MenuItem(1,10,0,10,"name","jain","10",true));
 
 
         }
@@ -98,7 +127,9 @@ public class Cart extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    void populateData(){
 
+    }
 
     void calculateTotal(){
 
@@ -108,7 +139,7 @@ public class Cart extends Fragment {
 
         for (int i=0;i<items.size();i++){
 
-            itemTotal+=items.get(i).getPrice()*items.get(i).getquantity();
+            itemTotal+=items.get(i).getPrice()*items.get(i).getQuantity();
 
         }
 
@@ -140,10 +171,10 @@ public class Cart extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull CartAdapter.myViewHolder holder, int position) {
 
-            FoodItem current = items.get(position);
+            MenuItem current = items.get(position);
 
             holder.name.setText(current.getName());
-            holder.quantity.setText(Integer.toString(current.getquantity()));
+            holder.quantity.setText(Integer.toString(current.getQuantity()));
             holder.price.setText(Integer.toString(current.getPrice()));
 
 
@@ -158,6 +189,7 @@ public class Cart extends Fragment {
         public class myViewHolder extends RecyclerView.ViewHolder{
 
             TextView name,price,quantity,minus,plus;
+            Spinner customize;
 
             public myViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -168,6 +200,31 @@ public class Cart extends Fragment {
                 minus=(TextView)itemView.findViewById(R.id.minus_cart);
                 plus=(TextView)itemView.findViewById(R.id.plus_cart);
 
+                customize = (Spinner)itemView.findViewById(R.id.customize);
+
+                ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.spinner_values,android.R.layout.simple_spinner_item);
+
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                customize.setAdapter(spinnerAdapter);
+
+                customize.setSelection(1);
+
+                customize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        // An item was selected. You can retrieve the selected item using
+                        // parent.getItemAtPosition(pos)
+
+                        //this to change the size of text dynamically
+                        ((TextView) parent.getChildAt(0)).setTextSize(10);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
                 listener mlistener =new listener();
                 minus.setOnClickListener(mlistener);
@@ -182,17 +239,17 @@ public class Cart extends Fragment {
 
                     Log.d("clicked ",Integer.toString(getAdapterPosition()));
 
-                    FoodItem current = items.get(getAdapterPosition());
+                    MenuItem current = items.get(getAdapterPosition());
                     int q;
                     switch(v.getId()){
 
                         case R.id.plus_cart:
-                           q= current.getquantity();
+                           q= current.getQuantity();
                            current.setQuantity(++q);
                            break;
 
                         case R.id.minus_cart:
-                            q= current.getquantity();
+                            q= current.getQuantity();
                             if(q>1) {
                                 current.setQuantity(--q);  //TODO handle quantity zero
                             }else{

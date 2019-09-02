@@ -6,18 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-import io.github.djunicode.canteenapp.R;
-import io.github.djunicode.canteenapp.models.MenuItemModel;
+import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
-    private List<MenuItemModel> menuList;
+       List<MenuItem> SelectedItems = GlobalData.getInstance().getSelectedItems();
+      private List<MenuItem> menuList;
     int q;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, price, time , quantity , plus ,minus;
@@ -51,27 +51,35 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 
             @Override
             public void onClick(View v) {
+                MenuItem current = menuList.get(getAdapterPosition());
+
                 switch (v.getId()){
 
                     case R.id.plus_menu:
-                        quantity.setText(Integer.toString(++q));
+                        current.addOne();
+                        quantity.setText(Integer.toString(current.getQuantity()));
                         break;
 
 
                     case R.id.minus_menu:
-                        if(q>1){
-                            quantity.setText(Integer.toString(--q));
-                        }else if(q==1){
+                        current.removeOne();
+                        if(current.getQuantity()>0){
+                            quantity.setText(Integer.toString(current.getQuantity()));
+                        }else{
                             Add.setVisibility(View.VISIBLE);
                             gridadd.setVisibility(View.GONE);
+                            SelectedItems.remove(current);
                         }
                         break;
 
-
                     case R.id.add_menu:
+                        current.addOne();
+                        SelectedItems.add(current);
                         Add.setVisibility(View.GONE);
                         gridadd.setVisibility(View.VISIBLE);
+                        quantity.setText(Integer.toString(current.getQuantity()));
                         break;
+
                 }
             }
         }
@@ -79,7 +87,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     }
 
 
-    public MenuAdapter(List<MenuItemModel> menuList) {
+    public MenuAdapter(List<MenuItem> menuList) {
         this.menuList = menuList;
     }
 
@@ -93,10 +101,18 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        MenuItemModel movie = menuList.get(position);
-        holder.title.setText(movie.getTitle());
-        holder.time.setText(movie.getGenre());
-        holder.price.setText(movie.getYear());
+        MenuItem movie = menuList.get(position);
+
+        holder.title.setText(movie.getName());
+        holder.time.setText(movie.getTime());
+        holder.price.setText(Integer.toString(movie.getPrice()));
+
+        if(movie.getQuantity()>0){
+
+            holder.Add.setVisibility(View.GONE);
+            holder.gridadd.setVisibility(View.VISIBLE);
+            holder.quantity.setText(Integer.toString(movie.getQuantity()));
+        }
     }
 
     @Override

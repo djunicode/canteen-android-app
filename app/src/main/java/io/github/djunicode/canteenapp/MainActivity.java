@@ -11,22 +11,32 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
+//import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+import io.github.djunicode.canteenapp.models.MenuItem;
+import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
 import io.github.djunicode.canteenapp.fragments.Cart;
 import io.github.djunicode.canteenapp.fragments.Menu;
 import io.github.djunicode.canteenapp.fragments.Orders;
 import io.github.djunicode.canteenapp.fragments.Profile;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     BottomNavigationView bottomNav;
     FragmentManager mFragmentManager;
+    Fragment menu,cart,order,profile;
+
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: MainAcitvity");
         setContentView(R.layout.activity_main);
 
 
@@ -35,11 +45,23 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(bottomNavListener);
 
+        menu = new Menu();
+        cart = new Cart();
+        order = new Orders();
+        profile = new Profile();
 
-        FragmentTransaction fragmentTransaction= mFragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction()
+                                                                .add(R.id.fragment_placeholder,menu)
+                                                                .add(R.id.fragment_placeholder,cart)
+                                                                .add(R.id.fragment_placeholder,order)
+                                                                .add(R.id.fragment_placeholder,profile);
 
-        Fragment menu = new Menu();
-        fragmentTransaction.add(R.id.fragment_placeholder,menu);
+//        fragmentTransaction.add(R.id.fragment_placeholder,menu);
+        fragmentTransaction.show(menu);
+        fragmentTransaction.hide(cart);
+        fragmentTransaction.hide(order);
+        fragmentTransaction.hide(profile);
+
         fragmentTransaction.commit();
         setActionBarTitle("MENU");
     }
@@ -49,36 +71,59 @@ public class MainActivity extends AppCompatActivity {
     public BottomNavigationView.OnNavigationItemSelectedListener bottomNavListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        public boolean onNavigationItemSelected(@NonNull android.view.MenuItem menuItem) {
 
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
             switch (menuItem.getItemId()){
 
                 case R.id.nav_menu:
-                    Fragment menu = new Menu();
-                    fragmentTransaction.replace(R.id.fragment_placeholder,menu);
+//                    fragmentTransaction.replace(R.id.fragment_placeholder,menu);
+
+                    fragmentTransaction.show(menu);
+                    fragmentTransaction.hide(cart);
+                    fragmentTransaction.hide(order);
+                    fragmentTransaction.hide(profile);
+
                     fragmentTransaction.commit();
                     setActionBarTitle("MENU");
                     return  true;
 
                 case R.id.nav_cart:
-                    Fragment cart = new Cart();
-                    fragmentTransaction.replace(R.id.fragment_placeholder,cart);
+//                    fragmentTransaction.replace(R.id.fragment_placeholder,cart);
+
+
+                    fragmentTransaction.hide(menu);
+                    fragmentTransaction.show(cart);
+                    fragmentTransaction.hide(order);
+                    fragmentTransaction.hide(profile);
+
                     fragmentTransaction.commit();
                     setActionBarTitle("CART");
                     return true;
 
                 case R.id.nav_order:
-                    Fragment order = new Orders();
-                    fragmentTransaction.replace(R.id.fragment_placeholder,order);
+//                    fragmentTransaction.replace(R.id.fragment_placeholder,order);
+
+
+                    fragmentTransaction.hide(menu);
+                    fragmentTransaction.hide(cart);
+                    fragmentTransaction.show(order);
+                    fragmentTransaction.hide(profile);
+
                     fragmentTransaction.commit();
                     setActionBarTitle("ORDERS");
                     return true;
 
                 case R.id.nav_profile:
-                    Fragment profile = new Profile();
-                    fragmentTransaction.replace(R.id.fragment_placeholder,profile);
+//                    fragmentTransaction.replace(R.id.fragment_placeholder,profile);
+
+
+                    fragmentTransaction.hide(menu);
+                    fragmentTransaction.hide(cart);
+                    fragmentTransaction.hide(order);
+                    fragmentTransaction.show(profile);
+
                     fragmentTransaction.commit();
                     setActionBarTitle("PROFILE");
                     return true;
@@ -117,4 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(title);
     }
+
+
 }

@@ -7,18 +7,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import io.github.djunicode.canteenapp.models.FoodItem;
+import io.github.djunicode.canteenapp.models.MenuItem;
 
 //This is the adapter for listview for orders in both previous and current order fragment
 
 public class OrderAdapter extends BaseAdapter {
 
-    ArrayList<FoodItem> items;
+    List<MenuItem> items;
     Context context;
 
-    public OrderAdapter(ArrayList<FoodItem> items, Context context) {
+    public OrderAdapter(List<MenuItem> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -52,11 +52,11 @@ public class OrderAdapter extends BaseAdapter {
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity_order);
         TextView price = (TextView) convertView.findViewById(R.id.price_order);
 
-        FoodItem item = (FoodItem)getItem(position);
+        MenuItem item = (MenuItem) getItem(position);
 
 
         name.setText(item.getName());
-        quantity.setText(" X " +Integer.toString(item.getquantity()));
+        quantity.setText(" X " +Integer.toString(item.getQuantity()));
         price.setText(Integer.toString(item.getPrice()));
 
         return convertView;

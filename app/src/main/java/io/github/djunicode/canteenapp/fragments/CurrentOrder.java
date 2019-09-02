@@ -4,22 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import io.github.djunicode.canteenapp.OrderAdapter;
 import io.github.djunicode.canteenapp.R;
-import io.github.djunicode.canteenapp.models.FoodItem;
+import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class CurrentOrder extends Fragment {
 
-    ArrayList<FoodItem> items;
+    ArrayList<MenuItem> items;
 
 
     @Nullable
@@ -38,6 +36,8 @@ public class CurrentOrder extends Fragment {
         setUpDummy();
 
         ListView list = (ListView)view.findViewById(R.id.list_current_order);
+        list.setDivider(null);
+        list.setDividerHeight(0);
 
         OrderAdapter madapter = new OrderAdapter(items,getActivity());
 
@@ -49,8 +49,7 @@ public class CurrentOrder extends Fragment {
 
         for(int i =0;i<5;i++){
 
-            items.add(new FoodItem("items "+i,20,2));
-
+            items.add(new MenuItem(1,10,0,10,"name","jain","10",true));
 
         }
 
