@@ -1,7 +1,10 @@
 package io.github.djunicode.canteenapp.ResponseObjects;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SignInResponse {
-    private String token, sap, name, phone;
+    @SerializedName("auth_token")
+    private String token;
 
     public String getToken() {
         return token;
@@ -9,17 +12,5 @@ public class SignInResponse {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public String getSap() {
-        return sap;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 }
