@@ -54,31 +54,31 @@ public class LoginActivity extends BaseActivity {
         token = retrieveToken();
         apiInterface = customRetrofit.create(ApiInterface.class);
 
-//        email.addTextChangedListener(new MyTextWatcher(email));
-//        password.addTextChangedListener(new MyTextWatcher(password));
+        email.addTextChangedListener(new MyTextWatcher(email));
+        password.addTextChangedListener(new MyTextWatcher(password));
 
 
 
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (!validateEmail()) {
-//                    return;
-//                }
-//
-//                if (!validatePassword()) {
-//                    return;
-//                }
-//                if (email.getText().toString().equals("admin@email.com")  && password.getText().toString().equals("admin")){
-//
-//                    Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
-//                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(i);
-//                }
-//            }
-//        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!validateEmail()) {
+                    return;
+                }
+
+                if (!validatePassword()) {
+                    return;
+                }
+                if (email.getText().toString().equals("admin@email.com")  && password.getText().toString().equals("admin")){
+
+                    Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                }
+            }
+        });
 
         if(token != null){
             Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
@@ -90,8 +90,7 @@ public class LoginActivity extends BaseActivity {
                 @Override
                 public void onClick(View view) {
                     emailString = email.getText().toString();
-//                    passwordString = SHAHashing();
-                    passwordString = password.getText().toString();
+                    passwordString = SHAHashing();
 
                     login(emailString, passwordString);
                 }
