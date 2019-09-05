@@ -28,9 +28,9 @@ import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity {
 
-    EditText password, email;
+    EditText password, sap;
     Button loginButton;
-    String emailString, passwordString;
+    String sapString, passwordString;
     private String token;
     private ApiInterface apiInterface;
     public static final String TOKEN_SHARED_PREFS_KEY = "tokenKey";
@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
         inputLayoutPassword =(TextInputLayout)findViewById(R.id.login_layout_pass);
 
         password = findViewById(R.id.passwordtxt);
-        email = findViewById(R.id.emailtxt);
+        sap = findViewById(R.id.saptxt);
         loginButton = findViewById(R.id.loginbtn);
 
         token = retrieveToken();
@@ -89,11 +89,11 @@ public class LoginActivity extends BaseActivity {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    emailString = email.getText().toString();
+                    sapString = sap.getText().toString();
 //                    passwordString = SHAHashing();
                     passwordString = password.getText().toString();
 
-                    login(emailString, passwordString);
+                    login(sapString, passwordString);
                 }
             });
 
@@ -127,9 +127,9 @@ public class LoginActivity extends BaseActivity {
         return  sha.digest();
     }
 
-    public void login(String email, String password) {
+    public void login(String sap, String password) {
 
-        SignInRequest post = new SignInRequest(email, password);
+        SignInRequest post = new SignInRequest(sap, password);
 
         Call<SignInResponse> call = apiInterface.createPostLogin(post);
         call.enqueue(new Callback<SignInResponse>() {
@@ -158,11 +158,11 @@ public class LoginActivity extends BaseActivity {
 
 
     private boolean validateEmail() {
-        String emailTxt = email.getText().toString().trim();
+        String emailTxt = sap.getText().toString().trim();
 
         if (emailTxt.isEmpty() || !isValidEmail(emailTxt)) {
             inputLayoutEmail.setError(getString(R.string.err_msg_email));
-            requestFocus(email);
+            requestFocus(sap);
             return false;
         } else {
             inputLayoutEmail.setErrorEnabled(false);
@@ -210,7 +210,7 @@ public class LoginActivity extends BaseActivity {
 
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
-                case R.id.emailtxt:
+                case R.id.saptxt:
                     validateEmail();
                     break;
                 case R.id.passwordtxt:
