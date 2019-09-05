@@ -68,11 +68,11 @@
 
 
                     <EditText
-                        android:id="@+id/emailtxt"
+                        android:id="@+id/saptxt"
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint=" Email"
+                        android:hint=" Sap"
                         android:inputType="textEmailAddress"
                         android:drawableLeft="@drawable/icon_email"
                         android:textColor="#000"/>
