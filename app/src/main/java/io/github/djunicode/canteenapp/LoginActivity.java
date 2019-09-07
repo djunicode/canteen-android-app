@@ -99,7 +99,10 @@ public class LoginActivity extends BaseActivity {
 
         }
     }
-
+    public void goToSignUp(View view){
+        Intent intent=new Intent(LoginActivity.this,SignUpStudent.class);
+        startActivity(intent);
+    }
     public String SHAHashing()
     {
 
