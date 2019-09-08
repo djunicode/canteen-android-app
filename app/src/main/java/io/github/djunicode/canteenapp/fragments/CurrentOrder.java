@@ -10,14 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.github.djunicode.canteenapp.GlobalData;
 import io.github.djunicode.canteenapp.OrderAdapter;
 import io.github.djunicode.canteenapp.R;
 import io.github.djunicode.canteenapp.models.MenuItem;
 
 public class CurrentOrder extends Fragment {
 
-    ArrayList<MenuItem> items;
+    List<MenuItem> items;
 
 
     @Nullable
@@ -47,11 +49,12 @@ public class CurrentOrder extends Fragment {
     void setUpDummy(){
         items = new ArrayList<>();
 
-        for(int i =0;i<5;i++){
-
-            items.add(new MenuItem(1,10,0,10,"name","jain","10",true));
-
-        }
+//        for(int i =0;i<5;i++){
+//
+//            items.add(new MenuItem(1,10,0,10,"name","jain","10",true));
+//
+//        }
+        items = GlobalData.getInstance().getSelectedItems();
 
     }
 

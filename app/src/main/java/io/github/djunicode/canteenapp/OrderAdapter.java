@@ -57,7 +57,7 @@ public class OrderAdapter extends BaseAdapter {
 
         name.setText(item.getName());
         quantity.setText(" X " +Integer.toString(item.getQuantity()));
-        price.setText(Integer.toString(item.getPrice()));
+        price.setText(Integer.toString(item.getPrice()*item.getQuantity()));
 
         return convertView;
     }
