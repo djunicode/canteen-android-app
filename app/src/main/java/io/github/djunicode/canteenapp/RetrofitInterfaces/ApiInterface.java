@@ -4,7 +4,9 @@ import java.util.List;
 
 import io.github.djunicode.canteenapp.RequestObjects.ChangePassword;
 import io.github.djunicode.canteenapp.RequestObjects.SignInRequest;
+import io.github.djunicode.canteenapp.RequestObjects.SignUpRequest;
 import io.github.djunicode.canteenapp.ResponseObjects.SignInResponse;
+import io.github.djunicode.canteenapp.ResponseObjects.SignUpResponse;
 import io.github.djunicode.canteenapp.models.MenuItem;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,5 +26,8 @@ public interface ApiInterface {
 
     @POST("auth/users/set_password/")
     Call<ResponseBody> changePassword(@Body ChangePassword changePassword);
+
+    @POST("student_signup/")
+    Call<SignUpResponse>createPostSignUp(@Body SignUpRequest signUpRequest);
 
 }

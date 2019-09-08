@@ -146,6 +146,7 @@
                     android:textColor="#000"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:onClick="goToSignUp"
 
                     />
             </LinearLayout>
