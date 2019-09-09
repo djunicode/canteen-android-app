@@ -3,8 +3,10 @@ package io.github.djunicode.canteenapp.RetrofitInterfaces;
 import java.util.List;
 
 import io.github.djunicode.canteenapp.RequestObjects.ChangePassword;
+import io.github.djunicode.canteenapp.RequestObjects.SendOrder;
 import io.github.djunicode.canteenapp.RequestObjects.SignInRequest;
 import io.github.djunicode.canteenapp.RequestObjects.SignUpRequest;
+import io.github.djunicode.canteenapp.ResponseObjects.OrderSentResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.SignInResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.SignUpResponse;
 import io.github.djunicode.canteenapp.models.MenuItem;
@@ -12,6 +14,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -30,4 +34,7 @@ public interface ApiInterface {
     @POST("student_signup/")
     Call<SignUpResponse>createPostSignUp(@Body SignUpRequest signUpRequest);
 
+    @POST("orders/")
+    Call<OrderSentResponse> placeOrder(@Header ("Authorization")String token,
+                                       @Body SendOrder sendOrder);
 }
