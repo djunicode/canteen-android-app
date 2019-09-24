@@ -77,6 +77,10 @@ public class CheckOutActivity extends BaseActivity {
 
             SharedPreferences tokenPrefs = getSharedPreferences(TOKEN_SHARED_PREFS_KEY, MODE_PRIVATE);
             String tokenValue = tokenPrefs.getString(TOKEN_STRING, null);
+
+            SharedPreferences userPrefs = getSharedPreferences(GlobalData.USER_SHARED_PREFS_KEY, MODE_PRIVATE);
+            int userId = Integer.valueOf(userPrefs.getString(GlobalData.USER_STRING, null));
+
             Toast.makeText(CheckOutActivity.this,"TOKEN : "+tokenValue,Toast.LENGTH_SHORT).show();
 
             items = GlobalData.getInstance().getSelectedItems();
@@ -87,7 +91,7 @@ public class CheckOutActivity extends BaseActivity {
             }
 
 
-            SendOrder sendOrder = new SendOrder(2,false,"paytm",
+            SendOrder sendOrder = new SendOrder(userId,false,"paytm",
                     "abc",null,orderItemList);
 
             Call<OrderSentResponse> call = apiInterface.placeOrder(tokenValue,sendOrder);

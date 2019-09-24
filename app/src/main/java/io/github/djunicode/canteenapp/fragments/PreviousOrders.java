@@ -1,28 +1,50 @@
 package io.github.djunicode.canteenapp.fragments;
 
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import java.util.ArrayList;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.github.djunicode.canteenapp.API;
+import io.github.djunicode.canteenapp.CheckOutActivity;
+import io.github.djunicode.canteenapp.GlobalData;
 import io.github.djunicode.canteenapp.OrderAdapter;
 import io.github.djunicode.canteenapp.R;
+import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
 import io.github.djunicode.canteenapp.models.MenuItem;
 import io.github.djunicode.canteenapp.models.Order;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
+import static io.github.djunicode.canteenapp.LoginActivity.TOKEN_SHARED_PREFS_KEY;
+import static io.github.djunicode.canteenapp.LoginActivity.TOKEN_STRING;
 
 public class PreviousOrders extends Fragment {
 
+    private static final String TAG = "PreviousOrders";
+
+    ProgressDialog progressDialog;
     RecyclerView recycler;
     RecyclerView.Adapter adapter;
-    ArrayList<MenuItem> items;
-    ArrayList<Order> orders;
+    List<MenuItem> items;
+    List<Order> orders;
+
+    ApiInterface api = API.getInstance().create(ApiInterface.class);
 
     @Nullable
     @Override
@@ -33,10 +55,63 @@ public class PreviousOrders extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpDummy();
+//        setUpDummy();
+
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
+
+
+        SharedPreferences tokenPrefs = getActivity().getSharedPreferences(TOKEN_SHARED_PREFS_KEY, MODE_PRIVATE);
+        String tokenValue = tokenPrefs.getString(TOKEN_STRING, null);
+
+
+        Call<List<Order>> prevOrderCall = api.getPreviousOrders("token "+tokenValue);
+
+
+        prevOrderCall.enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+//
+//                orders.clear();
+//                orders.addAll(response.body()) ;
+
+                orders = response.body();
+//                adapter.notifyDataSetChanged();
+
+                Log.i(TAG, "onResponse: "+orders.get(0).getItems());
+
+                recycler =(RecyclerView)view.findViewById(R.id.recycler_prev);
+
+                recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                adapter = new PreviousAdapter();
+                recycler.setAdapter(adapter);
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Toast.makeText(getContext(),TAG+"  "+t.getMessage(),Toast.LENGTH_SHORT).show();
+
+                Log.i(TAG, "onFailure: "+t.getMessage());
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+    private void setUp(View view){
 
         recycler =(RecyclerView)view.findViewById(R.id.recycler_prev);
 
@@ -85,7 +160,7 @@ public class PreviousOrders extends Fragment {
 
         @Override
         public int getItemCount() {
-            return items.size();
+            return orders.size();
         }
 
 

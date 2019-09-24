@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ import static io.github.djunicode.canteenapp.LoginActivity.TOKEN_SHARED_PREFS_KE
 import static io.github.djunicode.canteenapp.LoginActivity.TOKEN_STRING;
 
 public abstract class BaseActivity extends AppCompatActivity {
-
+    private static final String TAG = "BaseActivity";
     String tokenReturn;
     protected Retrofit customRetrofit;
     protected Boolean addToken = true;
@@ -47,6 +48,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                 Request request = chain.request();
                 Response response = chain.proceed(request);
+
+                Log.i(TAG, "intercept: "+response.body().toString());
+
                 if(response.code() == 401){
                     removeToken();
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class).putExtra(

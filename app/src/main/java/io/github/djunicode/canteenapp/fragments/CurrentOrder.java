@@ -1,26 +1,49 @@
 package io.github.djunicode.canteenapp.fragments;
 
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.djunicode.canteenapp.API;
 import io.github.djunicode.canteenapp.GlobalData;
 import io.github.djunicode.canteenapp.OrderAdapter;
 import io.github.djunicode.canteenapp.R;
+import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
 import io.github.djunicode.canteenapp.models.MenuItem;
+import io.github.djunicode.canteenapp.models.Order;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
+import static io.github.djunicode.canteenapp.LoginActivity.TOKEN_SHARED_PREFS_KEY;
+import static io.github.djunicode.canteenapp.LoginActivity.TOKEN_STRING;
 
 public class CurrentOrder extends Fragment {
 
-    List<MenuItem> items;
+    private static final String TAG = "CurrentOrder";
 
+    ProgressDialog progressDialog;
+    RecyclerView recycler;
+    RecyclerView.Adapter adapter;
+    List<MenuItem> items;
+    List<Order> orders;
+
+    ApiInterface api = API.getInstance().create(ApiInterface.class);
 
     @Nullable
     @Override
@@ -32,18 +55,59 @@ public class CurrentOrder extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpDummy();
+//        setUpDummy();
 
-        ListView list = (ListView)view.findViewById(R.id.list_current_order);
-        list.setDivider(null);
-        list.setDividerHeight(0);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
 
-        OrderAdapter madapter = new OrderAdapter(items,getActivity());
 
-        list.setAdapter(madapter);
+        SharedPreferences tokenPrefs = getActivity().getSharedPreferences(TOKEN_SHARED_PREFS_KEY, MODE_PRIVATE);
+        String tokenValue = tokenPrefs.getString(TOKEN_STRING, null);
+
+        Call<List<Order>> currOrdercall = api.getCurrentOrders("token "+tokenValue);
+
+        currOrdercall.enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+
+//                orders.clear();
+//                orders.addAll(response.body()) ;
+
+                orders = response.body();
+//                adapter.notifyDataSetChanged();
+
+                Log.i(TAG, "onResponse: "+orders.get(0).getItems());
+
+                recycler =(RecyclerView)view.findViewById(R.id.recycler_current);
+
+                recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                adapter = new CurrentOrder.CurrentAdapter();
+                recycler.setAdapter(adapter);
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Toast.makeText(getContext(),TAG+"  "+t.getMessage(),Toast.LENGTH_SHORT).show();
+
+                Log.i(TAG, "onFailure: "+t.getMessage());
+
+            }
+        });
+
+//        ListView list = (ListView)view.findViewById(R.id.list_current_order);
+//        list.setDivider(null);
+//        list.setDividerHeight(0);
+//
+//        OrderAdapter madapter = new OrderAdapter(items,getActivity());
+//
+//        list.setAdapter(madapter);
     }
 
     void setUpDummy(){
@@ -58,4 +122,45 @@ public class CurrentOrder extends Fragment {
 
     }
 
+
+    class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.myViewHolder>{
+
+        @NonNull
+        @Override
+        public CurrentAdapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.order_item,viewGroup,false);
+
+            return new CurrentAdapter.myViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CurrentAdapter.myViewHolder holder, int position) {
+
+            Order currentOrder = orders.get(position);
+
+
+            OrderAdapter listAdapter= new OrderAdapter(currentOrder.getItems(),getActivity());
+
+            holder.listView.setAdapter(listAdapter);
+        }
+
+        @Override
+        public int getItemCount() {
+            return orders.size();
+        }
+
+
+        class myViewHolder extends RecyclerView.ViewHolder {
+            ListView listView;
+
+            public myViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                listView=(ListView)itemView.findViewById(R.id.list_previous);
+            }
+        }
+    }
+
 }
+
+
