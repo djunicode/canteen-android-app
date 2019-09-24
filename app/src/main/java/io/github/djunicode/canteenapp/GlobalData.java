@@ -14,6 +14,12 @@ public class GlobalData {
         SelectedItems = new ArrayList<MenuItem>();
     }
 
+
+
+    public static final String USER_STRING = "userId";
+    public static final String USER_SHARED_PREFS_KEY = "userIdKey";
+
+
     public static GlobalData getInstance() {
         if(instance == null) {
             instance = new GlobalData();

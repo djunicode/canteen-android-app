@@ -10,6 +10,8 @@ import io.github.djunicode.canteenapp.ResponseObjects.OrderSentResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.SignInResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.SignUpResponse;
 import io.github.djunicode.canteenapp.models.MenuItem;
+import io.github.djunicode.canteenapp.models.Order;
+import io.github.djunicode.canteenapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -37,4 +39,16 @@ public interface ApiInterface {
     @POST("orders/")
     Call<OrderSentResponse> placeOrder(@Header ("Authorization")String token,
                                        @Body SendOrder sendOrder);
+
+    @GET("auth/users/me")
+    Call<User> fetchUser(@Header ("Authorization")String token);
+
+    @GET("user-orders/previous_orders")
+    Call<List<Order>> getPreviousOrders(@Header ("Authorization")String token);
+
+
+
+    @GET("user-orders/current_orders")
+    Call<List<Order>> getCurrentOrders(@Header ("Authorization")String token);
+
 }

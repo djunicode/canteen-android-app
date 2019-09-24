@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View;
@@ -22,9 +23,13 @@ import java.security.MessageDigest;
 import io.github.djunicode.canteenapp.RequestObjects.SignInRequest;
 import io.github.djunicode.canteenapp.ResponseObjects.SignInResponse;
 import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
+import io.github.djunicode.canteenapp.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static io.github.djunicode.canteenapp.GlobalData.USER_SHARED_PREFS_KEY;
+import static io.github.djunicode.canteenapp.GlobalData.USER_STRING;
 
 public class LoginActivity extends BaseActivity {
 
@@ -35,8 +40,14 @@ public class LoginActivity extends BaseActivity {
     private ApiInterface apiInterface;
     public static final String TOKEN_SHARED_PREFS_KEY = "tokenKey";
     public static final String TOKEN_STRING = "token";
+
+    private static final String TAG = "LoginActivity";
+
     Button login;
     TextInputLayout inputLayoutEmail,inputLayoutPassword;
+
+
+    ApiInterface api = API.getInstance().create(ApiInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +157,9 @@ public class LoginActivity extends BaseActivity {
                 token = signInResponse.getToken();
 
                 saveToken(token);
+
+                fetchUser(token);
+
                 Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
@@ -197,6 +211,40 @@ public class LoginActivity extends BaseActivity {
     }
 
 
+    //get user from api and save it in database
+
+    private void fetchUser(String token){
+
+        Call<User> userCall = api.fetchUser("token "+token);
+
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(!response.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "User not fetched", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                User user = response.body();
+                
+
+                SharedPreferences userPref = getSharedPreferences(USER_SHARED_PREFS_KEY, MODE_PRIVATE);
+                userPref.edit().putString(USER_STRING,Integer.toString(user.getId())).apply();
+
+                Toast.makeText(LoginActivity.this, "User id"+user.getId(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "User not fetched", Toast.LENGTH_SHORT).show();
+
+                Log.i(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
+
     private class MyTextWatcher implements TextWatcher {
 
         private View view;
@@ -222,5 +270,6 @@ public class LoginActivity extends BaseActivity {
             }
         }
     }
+
 
 }

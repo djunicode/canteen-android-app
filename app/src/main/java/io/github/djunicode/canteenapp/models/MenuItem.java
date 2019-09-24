@@ -4,15 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class MenuItem {
 
-    int id,price,quantity;
+    int id,price;
+
+    @SerializedName("quantity")
+    int quantity;
 
     @SerializedName("category")
     int categoryId;
 
-    String name,options;
+    @SerializedName("menu_item")
+    String name;
+
+    @SerializedName("options")
+    String options;
 
     @SerializedName("preparation_time")
     String time;
+
+    @SerializedName("comment")
+    String comment;
 
     boolean is_available;
 
