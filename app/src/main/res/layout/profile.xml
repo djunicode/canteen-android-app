@@ -11,7 +11,6 @@
         android:id="@+id/imageView"
         android:layout_width="119dp"
         android:layout_height="109dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,12 +23,11 @@
         android:id="@+id/textView3"
         android:layout_width="104dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:text="Jayshah"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="Jayshah"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
@@ -43,7 +41,7 @@
         android:layout_marginEnd="8dp"
         android:text="6004170053"
         android:textColor="#000"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView5"
@@ -68,7 +66,7 @@
         android:layout_marginEnd="8dp"
         android:text="6004170053"
         android:textColor="#000"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -88,16 +86,14 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="183dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:text="jayparthshah786@gmail.com"
         android:textColor="#000"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
@@ -116,144 +112,88 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="#726B68"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listgroup"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="80dp"
-
-
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background" />
-
-        <TextView
-            android:id="@+id/listtitle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="My Account"
-            android:textSize="24sp" />
-
-
-        <ImageView
-            android:layout_width="30dp"
-android:rotation="270"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:padding="6dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/down" />
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listgroup2"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <TextView
+        android:id="@+id/dept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Department"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3" />
+
+    <TextView
+        android:id="@+id/department"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="computer"
+        android:textColor="#000"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/dept"
+        app:layout_constraintTop_toBottomOf="@id/dept" />
+
+    <TextView
+        android:id="@+id/div"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listgroup">
+        android:text="Division"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3" />
 
-        <ImageView
-            android:id="@+id/icon2"
-            android:layout_width="80dp"
+    <TextView
+        android:id="@+id/division"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:textColor="#000"
+        android:textSize="18dp"
+        app:layout_constraintRight_toRightOf="@+id/div"
+        app:layout_constraintLeft_toLeftOf="@id/div"
+        app:layout_constraintTop_toBottomOf="@id/div"
+        app:layout_constraintHorizontal_bias="0.5"/>
 
-
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background" />
-
-        <TextView
-            android:id="@+id/listtitle2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Favourite"
-            android:textSize="24sp" />
-
-
-        <ImageView
-            android:id="@+id/indicator"
-            android:layout_width="30dp"
-            android:rotation="270"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="6dp"
-            android:src="@drawable/down" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listgroup3"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listgroup2">
+        android:text="Year of Admission"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/department" />
 
-        <ImageView
-            android:id="@+id/icon3"
-            android:layout_width="80dp"
+    <TextView
+        android:id="@+id/yearofadmission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="2017"
+        android:textColor="#000"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/year"
+        app:layout_constraintTop_toBottomOf="@id/year" />
 
-
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background" />
-
-        <TextView
-            android:id="@+id/listtitle3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Payment"
-            android:textSize="24sp" />
-
-
-        <ImageView
-            android:id="@+id/indicator3"
-            android:layout_width="30dp"
-            android:rotation="270"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="6dp"
-            android:src="@drawable/down" />
-    </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearLayout4"

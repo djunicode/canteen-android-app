@@ -7,6 +7,7 @@ import io.github.djunicode.canteenapp.RequestObjects.SendOrder;
 import io.github.djunicode.canteenapp.RequestObjects.SignInRequest;
 import io.github.djunicode.canteenapp.RequestObjects.SignUpRequest;
 import io.github.djunicode.canteenapp.ResponseObjects.OrderSentResponse;
+import io.github.djunicode.canteenapp.ResponseObjects.ProfileResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.SignInResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.SignUpResponse;
 import io.github.djunicode.canteenapp.models.MenuItem;
@@ -50,5 +51,8 @@ public interface ApiInterface {
 
     @GET("user-orders/current_orders")
     Call<List<Order>> getCurrentOrders(@Header ("Authorization")String token);
+
+    @GET("student-user/profile/")
+    Call<ProfileResponse> getProfile(@Header ("Authorization")String token);
 
 }
