@@ -84,11 +84,13 @@ android:orientation="horizontal"
                         app:layout_constraintStart_toEndOf="@+id/button">
 
 
-                        <ImageView
+                        <TextView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@mipmap/ic_launcher" />
+                            android:text="Rs. "
+                            android:textStyle="bold"
+                            android:textSize="24sp" />
 
 
                         <TextView
@@ -130,14 +132,9 @@ android:orientation="horizontal"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/ic_launcher" />
-
 
                     <TextView
+                        android:id="@+id/prepTime_menu"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"

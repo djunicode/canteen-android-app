@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class CurrentOrder extends Fragment {
     RecyclerView.Adapter adapter;
     List<MenuItem> items;
     List<Order> orders;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     ApiInterface api = API.getInstance().create(ApiInterface.class);
 
@@ -66,7 +69,7 @@ public class CurrentOrder extends Fragment {
 
 
         SharedPreferences tokenPrefs = getActivity().getSharedPreferences(TOKEN_SHARED_PREFS_KEY, MODE_PRIVATE);
-        String tokenValue = tokenPrefs.getString(TOKEN_STRING, null);
+        final String tokenValue = tokenPrefs.getString(TOKEN_STRING, null);
 
         Call<List<Order>> currOrdercall = api.getCurrentOrders("token "+tokenValue);
 
@@ -80,7 +83,7 @@ public class CurrentOrder extends Fragment {
                 orders = response.body();
 //                adapter.notifyDataSetChanged();
 
-                Log.i(TAG, "onResponse: "+orders.get(0).getItems());
+//                Log.i(TAG, "onResponse: "+orders.get(0).getItems());
 
                 recycler =(RecyclerView)view.findViewById(R.id.recycler_current);
 
@@ -101,13 +104,42 @@ public class CurrentOrder extends Fragment {
             }
         });
 
-//        ListView list = (ListView)view.findViewById(R.id.list_current_order);
-//        list.setDivider(null);
-//        list.setDividerHeight(0);
-//
-//        OrderAdapter madapter = new OrderAdapter(items,getActivity());
-//
-//        list.setAdapter(madapter);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_curr);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+                Call<List<Order>> currOrdercall = api.getCurrentOrders("token "+tokenValue);
+
+                currOrdercall.enqueue(new Callback<List<Order>>() {
+                    @Override
+                    public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+
+                        orders = response.body();
+                        adapter.notifyDataSetChanged();
+
+                        swipeRefreshLayout.setRefreshing(false);
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Order>> call, Throwable t) {
+                        Toast.makeText(getContext(),TAG+"  "+t.getMessage(),Toast.LENGTH_SHORT).show();
+
+                        Log.i(TAG, "onFailure: "+t.getMessage());
+
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+
+            }
+        });
+
+
+
     }
 
     void setUpDummy(){
@@ -142,6 +174,8 @@ public class CurrentOrder extends Fragment {
             OrderAdapter listAdapter= new OrderAdapter(currentOrder.getItems(),getActivity());
 
             holder.listView.setAdapter(listAdapter);
+            holder.date.setText(currentOrder.getDate());
+            holder.time.setText(currentOrder.getTime());
         }
 
         @Override
@@ -152,11 +186,16 @@ public class CurrentOrder extends Fragment {
 
         class myViewHolder extends RecyclerView.ViewHolder {
             ListView listView;
+            TextView date,time;
+
 
             public myViewHolder(@NonNull View itemView) {
                 super(itemView);
 
                 listView=(ListView)itemView.findViewById(R.id.list_previous);
+                date =(TextView) itemView.findViewById(R.id.date);
+                time =(TextView) itemView.findViewById(R.id.time);
+
             }
         }
     }

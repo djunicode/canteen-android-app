@@ -12,7 +12,7 @@ public class MenuItem {
     @SerializedName("category")
     int categoryId;
 
-    @SerializedName("menu_item")
+    @SerializedName(value="name", alternate={"menu_item"})
     String name;
 
     @SerializedName("options")
