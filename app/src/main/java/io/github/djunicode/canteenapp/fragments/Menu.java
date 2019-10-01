@@ -1,10 +1,13 @@
 package io.github.djunicode.canteenapp.fragments;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,6 +39,8 @@ public class Menu extends Fragment {
     private RecyclerView recyclerView;
     private MenuAdapter mAdapter;
     private static final String TAG = "Menu";
+    SwipeRefreshLayout swipeRefreshLayout;
+    SearchView searchView;
 
     ApiInterface api = API.getInstance().create(ApiInterface.class);
 
@@ -66,6 +72,33 @@ public class Menu extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
+
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_menu);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                prepareMenuData();
+            }
+        });
+
+
+        searchView = (SearchView) view.findViewById(R.id.searchview_menu);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
     }
 //
@@ -110,12 +143,15 @@ public class Menu extends Fragment {
                 menuList.clear();
                 menuList.addAll(response.body()) ;
                 mAdapter.notifyDataSetChanged();
+
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<List<MenuItem>> call, Throwable t) {
                 Log.i(TAG, "onFailure: "+t.getMessage());
 
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
             }
         });

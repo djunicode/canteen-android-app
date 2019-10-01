@@ -16,6 +16,7 @@ import io.github.djunicode.canteenapp.RequestObjects.SendOrder;
 import io.github.djunicode.canteenapp.ResponseObjects.OrderSentResponse;
 import io.github.djunicode.canteenapp.ResponseObjects.ResponseItems;
 import io.github.djunicode.canteenapp.RetrofitInterfaces.ApiInterface;
+import io.github.djunicode.canteenapp.fragments.Menu;
 import io.github.djunicode.canteenapp.models.MenuItem;
 import io.github.djunicode.canteenapp.models.Order;
 import retrofit2.Call;
@@ -32,6 +33,7 @@ public class CheckOutActivity extends BaseActivity {
     private ApiInterface apiInterface;
     ArrayList<ResponseItems> responseItemsList;
 
+    private static final String TAG = "CheckOutActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,14 +106,21 @@ public class CheckOutActivity extends BaseActivity {
                         Log.d("CHECKOUT ERROR : ", "onResponse: " + response.errorBody().toString() );
                         return;
                     }
+                    
                     OrderSentResponse orderSentResponse = response.body();
                     responseItemsList = orderSentResponse.getItems();
-                    //Toast.makeText(CheckOutActivity.this,"SIZE = "+responseItemsList.size(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckOutActivity.this,"SIZE = "+responseItemsList.size(),Toast.LENGTH_SHORT).show();
                     for (int i=0;i<responseItemsList.size();i++)
                     {
                         ResponseItems responseItems = responseItemsList.get(i);
                         Log.d("DEBUGGING : ", "onClick: "+responseItems.getMenu_item()+"-->"+responseItems.getQuantity());
                     }
+
+                    for(MenuItem item : GlobalData.getInstance().getAllMenuItems()){
+                        item.setQuantity(0);
+                    }
+
+
                 }
 
                 @Override
@@ -121,6 +130,8 @@ public class CheckOutActivity extends BaseActivity {
                 }
             });
 
+            Log.i(TAG, "onClick: set result");
+            GlobalData.getInstance().getSelectedItems().clear();
             setResult(1);
             finish();
         }

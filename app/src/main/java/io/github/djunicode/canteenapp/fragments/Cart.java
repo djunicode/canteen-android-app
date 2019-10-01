@@ -92,13 +92,24 @@ public class Cart extends Fragment {
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        items = GlobalData.getInstance().getSelectedItems();
-//        adapter.notifyDataSetChanged();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: ");
+        calculateTotal();
+     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode==1) {
+            items.clear();
+            items.addAll(GlobalData.getInstance().getSelectedItems());
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -111,6 +122,7 @@ public class Cart extends Fragment {
             items.addAll(GlobalData.getInstance().getSelectedItems());
             myRecyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            calculateTotal();
         }
     }
 
@@ -132,6 +144,9 @@ public class Cart extends Fragment {
     }
 
     void calculateTotal(){
+
+        Log.i(TAG, "calculateTotal: ");
+                
 
         total=0.0;
         itemTotal=0.0;

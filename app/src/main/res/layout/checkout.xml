@@ -30,7 +30,8 @@
                                         android:layout_below="@+id/card1"
                                         android:layout_margin="5dp"
                                         android:background="#fff"
-                                        android:elevation="@dimen/cardview_default_elevation">
+                                        android:elevation="@dimen/cardview_default_elevation"
+        android:visibility="gone">
 
         <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="match_parent">

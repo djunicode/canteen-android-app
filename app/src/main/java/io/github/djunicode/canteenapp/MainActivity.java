@@ -141,21 +141,30 @@ public class MainActivity extends BaseActivity {
 
         //money paid go to orders
 
-        if(resultCode==1){
-
-            try {
-                bottomNav.setSelectedItemId(R.id.nav_order);
-            }catch (IllegalStateException e){
-                Log.e(TAG, "onActivityResult: ",e);
-            }
-
-            FragmentTransaction fragmentTransaction= mFragmentManager.beginTransaction();
-
-            Fragment order = new Orders();
-            fragmentTransaction.add(R.id.fragment_placeholder,order);
-            fragmentTransaction.commitAllowingStateLoss();
-            setActionBarTitle("ORDERS");
-        }
+        super.onActivityResult(requestCode,resultCode,data);
+//        if(resultCode==1){
+//
+//            try {
+////                bottomNav.setSelectedItemId(R.id.nav_order);
+//
+//                FragmentTransaction fragmentTransaction= mFragmentManager.beginTransaction();
+//
+//                fragmentTransaction.add(new Orders(), null);
+//                fragmentTransaction.commitAllowingStateLoss();
+//
+////                fragmentTransaction.commit();
+//                setActionBarTitle("ORDERS");
+//
+//            }catch (IllegalStateException e){
+//                Log.e(TAG, "onActivityResult: ",e);
+//            }
+//
+//
+////            Fragment order = new Orders();
+////            fragmentTransaction.add(R.id.fragment_placeholder,order);
+////            fragmentTransaction.commitAllowingStateLoss();
+////            setActionBarTitle("ORDERS");
+//        }
     }
 
     public void setActionBarTitle(String title){

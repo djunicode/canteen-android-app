@@ -4,7 +4,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
-                                    android:padding="8dp">
+                                    android:padding="8dp"
+                                    app:cardCornerRadius="8dp">
 
     <LinearLayout
 
@@ -127,11 +128,14 @@
                         app:layout_constraintStart_toEndOf="@+id/button">
 
 
-                        <ImageView
+                        <TextView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@mipmap/ic_launcher" />
+                            android:text="Rs. "
+                            android:textStyle="bold"
+                            android:textSize="24sp" />
+
 
 
                         <TextView
@@ -173,12 +177,6 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/ic_launcher" />
-
 
                     <TextView
                         android:layout_width="match_parent"
@@ -204,7 +202,7 @@
                         android:layout_marginEnd="0dp"
                         android:lineSpacingExtra="14sp" />
 
-                    />
+
 
                     <TextView
                         android:layout_width="wrap_content"
